@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+
+		<template id="purchase_order_report_inherit" inherit_id="purchase.report_purchaseorder_document">
+
+			 <xpath expr="//div/div[1]" position="replace">
+                 <div class="col-xs-6">
+                    <strong>Shipping address:</strong>
+                    <div t-if="o.deliver_to">
+                        <div t-field="o.deliver_to"
+                            />
+                    </div>
+                 </div>
+
+
+            </xpath>
+             <xpath expr="//div/div[2]" position="replace">
+
+
+
+            </xpath>
+            <xpath expr="//table[@class='table table-condensed']/thead/tr"
+                position="replace">
+                         <tr>
+                        <th class="text-left"><strong>Sl.No</strong></th>
+                        <th><strong>Description</strong></th>
+                        <th class="text-center"><strong>Qty</strong></th>
+                        <th class="text-right"><strong>Unit of Measure</strong></th>
+                        </tr>
+            </xpath>
+            <xpath expr="//table[@class='table table-condensed']//tbody"
+                position="replace">
+                         <tbody>
+                             <t t-set="count" t-value="1"/>
+                    <tr t-foreach="o.order_line" t-as="order_line">
+                        <td>
+                            <span t-esc="count"/>
+                             <t t-set="count" t-value="count+1"/>
+                        </td>
+                        <td >
+                            <span t-field="order_line.name"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="order_line.product_qty"/>
+
+                        </td>
+                        <td class="text-right">
+                            <span t-field="order_line.product_uom"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </xpath>
+
+		</template>
+		
+		<template id="purchase_quotation_report_inherit" inherit_id="purchase.report_purchasequotation_document">
+            <xpath expr="//div/div[1]" position="replace">
+                 <div class="col-xs-6">
+                    <strong>Shipping address:</strong>
+                    <div t-if="o.deliver_to">
+                        <div t-field="o.deliver_to"
+                            />
+                    </div>
+                 </div>
+
+
+            </xpath>
+             <xpath expr="//div/div[2]" position="replace">
+
+
+
+            </xpath>
+            <xpath expr="//table[@class='table table-condensed']/thead/tr"
+                position="replace">
+                         <tr>
+                        <th class="text-left"><strong>Sl.No</strong></th>
+                        <th><strong>Description</strong></th>
+                        <th class="text-center"><strong>Qty</strong></th>
+                        <th class="text-right"><strong>Unit of Measure</strong></th>
+                        </tr>
+            </xpath>
+            <xpath expr="//table[@class='table table-condensed']//tbody"
+                position="replace">
+                         <tbody>
+                             <t t-set="count" t-value="1"/>
+                    <tr t-foreach="o.order_line" t-as="order_line">
+                        <td>
+                            <span t-esc="count"/>
+                             <t t-set="count" t-value="count+1"/>
+                        </td>
+                        <td >
+                            <span t-field="order_line.name"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="order_line.product_qty"/>
+
+                        </td>
+                        <td class="text-right">
+                            <span t-field="order_line.product_uom"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </xpath>
+
+        </template>
+
+	</data>
+</openerp>
