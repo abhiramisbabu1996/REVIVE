@@ -32,7 +32,7 @@ class FuelTransfer1(models.Model):
 	@api.multi
 	def unlink(self):
 		res = super(FuelTransfer1, self).unlink()
-		for rec in self:
+		for record in self:
 			location = self.env['stock.location'].search([('usage', '=', 'inventory')], limit=1)
 
 			stock_move = self.env['stock.move'].create({'name': record.product_id.name,
@@ -2343,9 +2343,10 @@ class PartnerDailyStatementLine(models.Model):
 
 		return res
 
+	estimation_line_id = fields.Many2one('task.line')
 	task_category_id = fields.Many2one("task.category.details")
 	# estimation_line_id = fields.Many2one('estimation.line')
-	estimation_line_id = fields.Many2one('line.estimation')
+	# estimation_line_id = fields.Many2one('line.estimation')
 	no_labours = fields.Integer('No of Labours')
 	work_id = fields.Many2one('project.work', 'Description Of Work')
 	qty_estimate = fields.Float('Quantity')

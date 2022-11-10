@@ -47,7 +47,7 @@ class MasterPlanLine(models.Model):
     remarks = fields.Text()
     upto_date_qty = fields.Float(store=True, string='Balance Qty')
     quantity = fields.Float(string='Work Order Qty')
-    subcontractor = fields.Many2one('res.partner', domain=[('contractor', '=', True)])
+    subcontractor = fields.Many2one('res.partner')
 
     @api.one
     @api.onchange('start_date', 'finish_date')
@@ -56,32 +56,33 @@ class MasterPlanLine(models.Model):
             if rec.start_date and rec.finish_date:
                 rec.duration = (datetime.strptime(rec.finish_date, "%Y-%m-%d") - datetime.strptime(rec.start_date, "%Y-%m-%d")).days
 
-    @api.onchange('line_id.project_id')
-    def onchange_project_id(self):
+    @api.onchange('subcontractor', 'line_id.project_name')
+    def onchange_project_id_subcontractor(self):
         subcontractor_ids = []
         for rec in self:
-            if rec.line_id.project_id:
-                if rec.line_id.project_id.contractor_id1:
-                    subcontractor_ids.append(rec.line_id.project_id.contractor_id1.id)
-                if rec.line_id.project_id.contractor_id2:
-                    subcontractor_ids.append(rec.line_id.project_id.contractor_id2.id)
-                if rec.line_id.project_id.contractor_id3:
-                    subcontractor_ids.append(rec.line_id.project_id.contractor_id3.id)
+            if rec.line_id.project_name:
+                if rec.line_id.project_name.contractor_id1:
+                    subcontractor_ids.append(rec.line_id.project_name.contractor_id1.id)
+                if rec.line_id.project_name.contractor_id2:
+                    subcontractor_ids.append(rec.line_id.project_name.contractor_id2.id)
+                if rec.line_id.project_name.contractor_id3:
+                    subcontractor_ids.append(rec.line_id.project_name.contractor_id3.id)
                 return {'domain':{
                     'subcontractor': [('id', 'in', subcontractor_ids)]
                 }}
     
-    @api.onchange('line_id.project_id')
+    @api.onchange('employee_id', 'line_id.project_name')
     def onchange_project_id(self):
         for rec in self:
             employee_ids = []
-            if rec.line_id.project_id:
-                if rec.line_id.project_id.site_engineer1:
-                    employee_ids.append(rec.line_id.project_id.site_engineer1.id)
-                if rec.line_id.project_id.site_engineer2:
-                    employee_ids.append(rec.line_id.project_id.site_engineer2.id)
-                if rec.line_id.project_id.site_engineer3:
-                    employee_ids.append(rec.line_id.project_id.site_engineer3.id)
+            if rec.line_id:
+                if rec.line_id.project_name:
+                    if rec.line_id.project_name.site_engineer1:
+                        employee_ids.append(rec.line_id.project_name.site_engineer1.id)
+                    if rec.line_id.project_name.site_engineer2:
+                        employee_ids.append(rec.line_id.project_name.site_engineer2.id)
+                    if rec.line_id.project_name.site_engineer3:
+                        employee_ids.append(rec.line_id.project_name.site_engineer3.id)
 
                 return {'domain': {
                     'employee_id': [('id', 'in', employee_ids)]
@@ -195,7 +196,6 @@ class PlanningChartLine(models.Model):
                                     ('partially_completed', 'Partially Completed'),
                                     ('completed', 'Completed')])
 
-
     @api.onchange('master_plan_line_id')
     def _onchage_master_plan_line_id(self):
         for rec in self:
@@ -215,7 +215,10 @@ class PlanningChartLine(models.Model):
             if 'master_plan_id' in lines:
                 del lines['master_plan_id']
             vals.update({'plan_id': res.id})
-            project_id.update({'planning_chart_line_ids': [(0, 0, lines)]})
+            new_lines = [(0, 0, lines)]
+            # project_id.update({'estimation_line_ids': lines})
+            # project_id.update({'planning_chart_line_ids': [(0, 0, lines)]})
+            project_id.planning_chart_line_ids.update(new_lines)
 
 
         return res

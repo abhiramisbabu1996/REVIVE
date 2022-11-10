@@ -323,7 +323,7 @@
                             <field name="supplier_ids"  widget="many2many_tags" context="{'search_default_supplier':1, 'default_supplier':1, 'default_customer':0}" domain="[('supplier','=',True)]"/>
 
 
-                            <field name="currency_id" groups="base.group_multi_currency"/>
+                            <field name="currency_id"/>
 							<field name="project_id"/>
                             <field name="location_id" string="Location"/>
                             <field name="vehicle_id"/>

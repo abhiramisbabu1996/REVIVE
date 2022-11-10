@@ -532,6 +532,28 @@ class AccountStatmentsProject(models.Model):
                                     ('completed', 'Completed')])
 
 
+class ActualEstimation(models.Model):
+    _name = 'actual.estimation.line'
+
+    project_id = fields.Many2one('project.project')
+    remark = fields.Char()
+    estimated_cost = fields.Float()
+    actual_estimated_cost = fields.Float()
+    actual_working_hours = fields.Float()
+    estimated_hours = fields.Float()
+    work_description = fields.Char()
+    work_plan = fields.Many2one('master.plan.line')
+
+    @api.onchange('work_plan')
+    def onchange_work_plan(self):
+        for record in self:
+            task_lines = self.env['task.line'].search([('estimate_plan_line', '=', record.work_plan.id)])
+            output_summary_lines = self.env['partner.daily.statement.line'].search([('estimation_line_id', 'in', task_lines)])
+
+
+
+
+
 class project(models.Model):
     _inherit = "project.project"
 
@@ -583,7 +605,11 @@ class project(models.Model):
             }
         }
 
-    company_id = fields.Many2one('res.company', 'Company', required=True)
+    @api.model
+    def _default_company_id(self):
+        return self.env.user.company_id
+    
+    company_id = fields.Many2one('res.company', 'Company', required=True, default=_default_company_id)
     estimated_cost = fields.Float(compute='_compute_estimated_cost', store=True, string='Estimated Cost')
     estimated_cost_extra = fields.Float(compute='_compute_estimated_cost_extra', store=True, string='Estimated Cost for Extra Work')
     total_estimated_cost = fields.Float(compute='_compute_estimated_cost_total', store=True, string='Total Estimated Cost')
@@ -635,6 +661,7 @@ class project(models.Model):
     plan_id = fields.Many2one('master.plan')
     planning_chart_line_ids = fields.One2many('budget.planning.chart.line', 'project_id')
     project_master_line_ids = fields.One2many('project.master.plan.line', 'project_id')
+    actual_estimation_line_ids = fields.One2many('actual.estimation.line', 'project_id')
 
     @api.depends('partner_id')
     def _onchange_acc_statement(self):
@@ -1711,7 +1738,7 @@ class purchase_order(models.Model):
     @api.model
     def _default_currency(self):
         journal = self._default_journal()
-        return journal.currency or journal.company_id.currency_id
+        return journal.currency or journal.company_id.currency_id or self.env.user.company_id.currency_id
 
     @api.model
     def _default_journal(self):

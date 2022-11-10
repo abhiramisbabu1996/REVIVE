@@ -558,6 +558,20 @@
 							</tree>
 						</field>
 					</page>
+					<page string="Actual Budget Estimation">
+						<field name="actual_estimation_line_ids" nolabel="1">
+							<tree editable="bottom">
+								<field name="work_plan" string="Work Plan"/>
+								<field name="work_description" string="Work Description"/>
+								<field name="estimated_hours" string="Estimated Hours"/>
+								<field name="actual_working_hours" string="Actual Working Hours"/>
+								<field name="estimated_cost" string="Estimated Cost"/>
+								<field name="actual_estimated_cost" string="Actual Estimated Cost"/>
+								<field name="remark"/>
+							</tree>
+						</field>
+					</page>
+
 
 
 

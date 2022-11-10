@@ -84,8 +84,8 @@
 						<field name="site_id" required="True" options="{'no_create':1}" />
 						<field name="project_name" required="True"/>
 <!--						<field name="contractor_id" required="True"/>-->
-						<field name="sqft" required="True" />
-						<field name="no_floors" required="True" />
+						<field name="sqft" required="True" string="SQFT/KM"/>
+						<field name="no_floors" required="True" string="Floors/Distance"/>
 						<field name="work_start_date"/>
 						<field name="agreement_date"/>
 						<field name="completion_date"/>
@@ -103,7 +103,7 @@
 										<field name="products_id" options="{'no_create':1}" widget="many2many_tags"/>
 										<field name="veh_categ_id" options="{'no_create':1}" widget="many2many_tags"/>
 										<field name="no_labours" string="No of workers"/>
-										<field name="sqft" />
+										<field name="sqft" string="Length(KM)"/>
 										<field name="subcontractor"/>
 										<field name="remarks"/>
 									</tree>
@@ -203,7 +203,7 @@
 
 
 		<menuitem id="sub_menu_hiworth_master_plan" parent="main_menu_hiworth_planning"
-				  name="Master Plan" sequence="10" action="action_master_plan" groups="hiworth_hr_attendance.group_supervisor,base.group_erp_manager"/>
+				  name="Master Plan &amp; Estimation" sequence="10" action="action_master_plan" groups="hiworth_hr_attendance.group_supervisor,base.group_erp_manager"/>
 
 
 <!--		<record id="form_planning_chart" model="ir.ui.view">-->
