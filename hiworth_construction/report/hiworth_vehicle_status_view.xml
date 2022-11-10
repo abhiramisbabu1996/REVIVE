@@ -49,11 +49,11 @@
 
 		 <menuitem name="Report" parent="fleet.menu_root" id="fleet_report" sequence="9" />
 
-<!--		<menuitem action="action_vehicle_status_report_wizard"-->
-<!--				  parent="fleet_report"-->
-<!--				  id="menu_vehicle_status"-->
-<!--				  sequence="10"-->
-<!--				  name="Vehicle/Machinery Status Report"  />-->
+		<menuitem action="action_vehicle_status_report_wizard"
+				  parent="fleet_report"
+				  id="menu_vehicle_status"
+				  sequence="10"
+				  name="Vehicle/Machinery Status Report"  />
 
 
 
