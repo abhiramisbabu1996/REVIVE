@@ -34,9 +34,9 @@
 			<field name="target">new</field>
 		</record>
 
-<menuitem id="menu_fuel_report"
-				  parent="hiworth_construction.fleet_report"
-				  action="action_form_vehicle_fuel_report_report"
-				  name="Fuel Report Excel" sequence="27" />
+<!--<menuitem id="menu_fuel_report"-->
+<!--				  parent="hiworth_construction.fleet_report"-->
+<!--				  action="action_form_vehicle_fuel_report_report"-->
+<!--				  name="Fuel Report Excel" sequence="27" />-->
     </data>
 </openerp>
