@@ -538,10 +538,10 @@
 	</record>
 
 
-	<menuitem action="action_vehicle_fuel_voucher"
-			  parent="hiworth_construction.fleet_report"
-			  id="menu_vehicle_fuel_voucher"
-			  name="Odometer &amp; Fuel Voucher Report" />
+<!--	<menuitem action="action_vehicle_fuel_voucher"-->
+<!--			  parent="hiworth_construction.fleet_report"-->
+<!--			  id="menu_vehicle_fuel_voucher"-->
+<!--			  name="Odometer &amp; Fuel Voucher Report" />-->
 
 
 	<record model='ir.ui.view' id='view_rent_vehicle_form'>

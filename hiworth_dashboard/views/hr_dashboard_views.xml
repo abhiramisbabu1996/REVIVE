@@ -947,7 +947,7 @@
 
         <menuitem id="menu_hr_config" parent= "hr.menu_hr_reporting" sequence= "1" name= "DashBoard" action="custom_hr_dashboard_action"/>
          <menuitem id="base.next_id_64" name="Sales" parent="base.menu_reporting" sequence="1" groups="hiworth_dashboard.group_hiworth_dashboard" />
-        <menuitem id="hr.menu_hr_reporting" parent="base.menu_reporting" name="My DashBoard" sequence="40"/>
+        <menuitem id="hr.menu_hr_reporting"  name="My DashBoard" sequence="40"/>
         <menuitem id="account.menu_finance_reporting" name="Accounting" parent="base.menu_reporting" sequence="35" groups="hiworth_dashboard.group_hiworth_dashboard"/>
         <menuitem parent="base.menu_reporting" id="event.menu_reporting_events" sequence="30" groups="hiworth_dashboard.group_hiworth_dashboard" name="Events"/>
         <menuitem name="Fleet" parent="base.menu_reporting" id="fleet.menu_fleet_reporting" sequence="50" groups="hiworth_dashboard.group_hiworth_dashboard"/>
