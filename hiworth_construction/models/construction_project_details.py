@@ -1,6 +1,6 @@
-from openerp import fields, models, api
-from openerp.osv import fields as osv, expression
-from openerp.osv import fields as old_fields
+from openerp import models, api
+from openerp import fields
+from openerp.osv import fields as old_fields, osv, expression
 # from openerp.osv import fields, osv
 import time
 from openerp.osv.orm import browse_record_list, browse_record, browse_null
@@ -19,7 +19,6 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FO
 from openerp import SUPERUSER_ID
 
 from lxml import etree
-
 
 
 
