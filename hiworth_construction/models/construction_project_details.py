@@ -211,6 +211,9 @@ class TaskDetails(models.Model):
     category_id = fields.Many2one("task.category.details")
     stage_id = fields.Many2one('project.stages', 'Project Stage')
 
+
+# Task Details
+
 class TaskLine(models.Model):
     _name = "task.line"
 
@@ -219,6 +222,7 @@ class TaskLine(models.Model):
     remarks_new = fields.Char('Remarks')
     work_loc = fields.Char("Work Location")
     estimated_hrs = fields.Char('Time Allocated')
+    new = fields.Char('Time Allocated')
     #     comments = fields.Char('Comments')
     #     task_status = fields.Selection([
     # 			('completed', 'Completed'),
