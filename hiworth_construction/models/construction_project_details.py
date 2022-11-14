@@ -336,6 +336,24 @@ class task(models.Model):
     date_end = fields.Date()
     date_start = fields.Date()
 
+    @api.multi
+    def create_supervisor_daily_stmt(self):
+        return{
+                'name':  _('Supervisor Daily Statement'),
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'partner.daily.statement',
+                'type': 'ir.actions.act_window',
+                'view_id': self.env.ref('hiworth_construction.form_partner_daily_statement').id,
+                'target': 'current',
+                'context': {'default_employee_id': self.reviewer_id.employee_id.id,
+                            'default_project_task_id':self.id,
+                            'default_project_id':self.project_id.id,
+                            # 'location_ids':self.project_id.project_location_ids.id,
+                            }
+
+        }
+
 
     @api.multi
     def task_approve(self):
@@ -454,7 +472,7 @@ class MasterPlanLine(models.Model):
     _name = 'project.master.plan.line'
     _rec_name = "work_id"
 
-    line_id = fields.Many2one('master.plan')
+    master_plan_line_id = fields.Many2one('master.plan.line')
     work_id = fields.Many2one('project.work', 'Description Of Work')
     qty_estimate = fields.Float('Qty As Per Estimate')
     unit = fields.Many2one('product.uom', 'Unit')
@@ -547,13 +565,19 @@ class ActualEstimation(models.Model):
     actual_working_hours = fields.Float()
     estimated_hours = fields.Float()
     work_description = fields.Char()
+    work_done= fields.Char()
+    reason_for_delay= fields.Char(string="Reason for Delay")
     work_plan = fields.Many2one('master.plan.line')
+    sub_contractor = fields.Many2one('res.partner')
 
-    @api.onchange('work_plan')
-    def onchange_work_plan(self):
-        for record in self:
-            task_lines = self.env['task.line'].search([('estimate_plan_line', '=', record.work_plan.id)])
-            output_summary_lines = self.env['partner.daily.statement.line'].search([('estimation_line_id', 'in', task_lines)])
+
+    # @api.onchange('work_plan')
+    # def onchange_work_plan(self):
+    #     for record in self:
+    #         task_lines = self.env['task.line'].search([('estimate_plan_line', '=', record.work_plan.id)])
+    #         output_summary_lines = self.env['partner.daily.statement.line'].search([('estimation_line_id', 'in', task_lines)])
+    #         # subcontactor_summary_lines =
+
 
 
 
@@ -612,9 +636,9 @@ class project(models.Model):
 
     @api.model
     def _default_company_id(self):
-        return self.env.user.company_id
+        return self.env.user.company.partner_id
     
-    company_id = fields.Many2one('res.company', 'Company', required=True, default=_default_company_id)
+    company_id = fields.Many2one('res.company', 'Company', required=True,)
     estimated_cost = fields.Float(compute='_compute_estimated_cost', store=True, string='Estimated Cost')
     estimated_cost_extra = fields.Float(compute='_compute_estimated_cost_extra', store=True, string='Estimated Cost for Extra Work')
     total_estimated_cost = fields.Float(compute='_compute_estimated_cost_total', store=True, string='Total Estimated Cost')
@@ -628,10 +652,8 @@ class project(models.Model):
     task_ids = fields.One2many('project.task', 'project_id',
                                     domain=[('is_extra_work', '=', False)])
     extra_task_ids = fields.One2many('project.task', 'project_id', domain=[('is_extra_work','=', True)])
-
     stage_id = fields.One2many('project.stages', 'project_id', 'Project Status')
     stages_generated = fields.Boolean('Stages Generated', default=False)
-
     location_id = fields.Many2one('stock.location', 'Location', domain=[('usage','=','internal')])
     cent = fields.Float('Cent')
     building_sqf = fields.Float('Building in Sq. Ft')
@@ -654,7 +676,7 @@ class project(models.Model):
     directory_ids = fields.One2many('project.directory', 'project_id', 'Directory')
     project_location_ids = fields.Many2many('stock.location','stock_location_project_rel','stock_location_id','project_id',"Locations")
     # partner_id.property_account_receivable.balance
-    company_contractor_id = fields.Many2one('res.partner', domain=[('company_contractor', '=', True)], string="Company")
+    company_contractor_id = fields.Many2one('res.partner', domain=[('company_contractor', '=', True)], string="Company", default=_default_company_id)
     agreement_no = fields.Char("Agreement No")
     agreement_date = fields.Date("Agreement Date")
     district_id = fields.Many2one('location.district',"District")

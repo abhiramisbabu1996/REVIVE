@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
 	<data>
-
-
-
 		<record id="view_next_approver1" model="ir.ui.view">
 			<field name="name">form.approver.line</field>
 			<field name="model">approver.lines</field>
@@ -98,7 +95,7 @@
 					<group string="Task Details">
 					<notebook>
 						<page>
-							<field name="project_task_line_ids" nolabel="1" create="0">
+							<field name="project_task_line_ids" nolabel="1" no_create="1">
 								<tree editable="bottom">
 									<field name="estimate_plan_line" string="Work"/>
 									<field name="work_id" string="Description Of Work"/>
@@ -764,8 +761,8 @@
 					<group string="Subcontractor Daily Work Report">
 					<notebook>
 						<page string="Subcontractor Daily Work">
-							<field name="project_task_ids" nolabel="1">
-								<tree editable="bottom">
+							<field name="project_task_ids" nolabel="1" no_create="0">
+								<tree>
 									<field name="name"/>
 									<field name="project_id"/>
 									<field name="date_start" groups="base.group_no_one"/>

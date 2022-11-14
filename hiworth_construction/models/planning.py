@@ -105,9 +105,9 @@ class MasterPlanLine(models.Model):
             # line = res.copy()
             # line.project_id = project_id
             lines = vals
-            if 'line_id' in lines:
-                del lines['line_id']
-            project_id.update({'project_master_line_ids': [(0, 0, lines)]})
+            lines.update({'master_plan_line_id': res.id,
+                         'project_id': project_id.id})
+            project_id.project_master_line_ids.create(lines)
         return res
 
     # @api.multi
@@ -212,13 +212,15 @@ class PlanningChartLine(models.Model):
             # line = res.copy()
             # line.project_id = project_id
             lines = vals
-            if 'master_plan_id' in lines:
-                del lines['master_plan_id']
-            vals.update({'plan_id': res.id})
-            new_lines = [(0, 0, lines)]
-            # project_id.update({'estimation_line_ids': lines})
-            # project_id.update({'planning_chart_line_ids': [(0, 0, lines)]})
-            project_id.planning_chart_line_ids.update(new_lines)
+            # if 'master_plan_id' in lines:
+            #     del lines['master_plan_id']
+            lines.update({'plan_id': res.id,
+                         'project_id': project_id.id})
+            # new_lines = [(0, 0, lines)]
+            # # project_id.update({'estimation_line_ids': lines})
+            # # project_id.update({'planning_chart_line_ids': [(0, 0, lines)]})
+            # lines[] = pr
+            project_id.planning_chart_line_ids.create(lines)
 
 
         return res
