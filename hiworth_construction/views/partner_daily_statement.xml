@@ -75,7 +75,7 @@
 					<group>
 						<group>
 
-							<field name="employee_id" required="True" string="Supervisor"
+							<field name="employee_id" required="True" string="Supervisor" domain="[('user_category','=','site_eng')]"
 								  />
 <!--							<field name="account_id" required="True" />-->
 							<field name="date" required="True" attrs="{'readonly':[('state','in',('confirmed','approved','checked','cancelled'))]}" />
@@ -102,9 +102,9 @@
 									<!--								<field name="category_id"/>-->
 	<!--								<field name="employee_id" string="Superisor"/>-->
 									<field name="sqft"/>
-	<!--								<field name="no_labours"/>-->
-	<!--								<field name="veh_categ_id" options="{'no_create':1}" widget="many2many_tags"/>-->
-	<!--								<field name="material" options="{'no_create':1}" widget="many2many_tags"/>-->
+									<field name="no_labours"/>
+									<field name="veh_categ_id" options="{'no_create':1}" widget="many2many_tags"/>
+									<field name="material" options="{'no_create':1}" widget="many2many_tags"/>
 	<!--								<field name="qty_estimate"/>-->
 	<!--								<field name="unit"/>-->
 	<!--								<field name="rate"/>-->
@@ -146,8 +146,8 @@
 									<field name="quantity"/>
 <!--									<field name="pre_qty"/>-->
 <!--									<field name="upto_date_qty"/>-->
-									<field name="rate"/>
-									<field name="estimate_cost"/>
+<!--									<field name="rate"/>-->
+<!--									<field name="estimate_cost"/>-->
 									<field name="estimated_hrs" string="Estimated hours"/>
 									<field name="remarks"/>
 

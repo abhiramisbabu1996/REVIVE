@@ -73,12 +73,12 @@
 			<field name="view_id" ref="tree_progress_report" />
 		</record>
 
-		<menuitem id="menu_progress_report_in_activity_report" parent="root_activity_reports_menu"
-			name="Progress Report" sequence="40"
-			groups="project.group_project_manager,group_estimation_user" />
+<!--		<menuitem id="menu_progress_report_in_activity_report" parent="root_activity_reports_menu"-->
+<!--			name="Progress Report" sequence="40"-->
+<!--			groups="project.group_project_manager,group_estimation_user" />-->
 
-		<menuitem id="menu_progress_report" parent="menu_progress_report_in_activity_report"
-			action="action_progress_report" name="Progress Report" sequence="10" />
+<!--		<menuitem id="menu_progress_report" parent="menu_progress_report_in_activity_report"-->
+<!--			action="action_progress_report" name="Progress Report" sequence="10" />-->
 
 
 	</data>
