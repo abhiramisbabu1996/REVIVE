@@ -678,7 +678,8 @@ class project(models.Model):
     directory_ids = fields.One2many('project.directory', 'project_id', 'Directory')
     project_location_ids = fields.Many2many('stock.location','stock_location_project_rel','stock_location_id','project_id',"Locations")
     # partner_id.property_account_receivable.balance
-    company_contractor_id = fields.Many2one('res.partner', domain=[('company_contractor', '=', True)], string="Company", default=_default_company_id)
+    # company_contractor_id = fields.Many2one('res.partner', domain=[('company_contractor', '=', True)], string="Company", default=_default_company_id)
+    company_contractor_id = fields.Many2one('res.partner', domain=[('company_contractor', '=', True)], string="Company")
     agreement_no = fields.Char("Agreement No")
     agreement_date = fields.Date("Agreement Date")
     district_id = fields.Many2one('location.district',"District")
