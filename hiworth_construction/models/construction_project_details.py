@@ -1,4 +1,5 @@
-from openerp import fields, models, api
+from openerp import models, api
+from openerp import fields
 from openerp.osv import fields as old_fields, osv, expression
 # from openerp.osv import fields, osv
 import time
