@@ -222,7 +222,9 @@ class TaskLine(models.Model):
     remarks_new = fields.Char('Remarks')
     work_loc = fields.Char("Work Location")
     estimated_hrs = fields.Char('Time Allocated')
-    new = fields.Char('Time Allocated')
+    # material = fields.Many2many('product.product', 'material_line','line_product_id', string='Materials')
+    material = fields.Many2many('product.product',string='Materials')
+    # new = fields.Char('Time Allocated')
     #     comments = fields.Char('Comments')
     #     task_status = fields.Selection([
     # 			('completed', 'Completed'),
@@ -884,7 +886,7 @@ class LineEstimation(models.Model):
     finish_date = fields.Date('Finish Date')
     employee_id = fields.Many2one('hr.employee', 'Employee')
     veh_categ_id = fields.Many2many('vehicle.category.type', 'veh_categ_mlines','estimation_line_vehicle', string='Machinery')
-    material = fields.Many2many('product.product', 'material_line','line_product_id', string='Materials')
+    material = fields.Many2many('product.product',string='Materials')
     estimate_cost = fields.Float('Estimate Cost')
     pre_qty = fields.Float('Previous Qty')
     upto_date_qty = fields.Float(store=True, string='Balance Qty')

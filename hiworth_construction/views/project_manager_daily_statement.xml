@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record id="form_project_manager_daily_statement" model="ir.ui.view">
+			<field name="name">pm.daily.statement</field>
+			<field name="model">pm.daily.statement</field>
+			<field name="arch" type="xml">
+				<form string="PM Daily Statement">
+					<sheet>
+						<group>
+							<field name="partner_id"/>
+							<field name="date"/>
+							<field name="project_id"/>
+						</group>
+						<notebook>
+						<page string="Daily Statements">
+									<field name="pm_work_ids" nolabel="1">
+										<tree editable="bottom">
+											<field name="projectname_id"/>
+											<field name="supervisor_id"/>
+											<field name="work_planned1"/>
+											<field name="name_subcontractor"/>
+											<field name="no_labours"/>
+											<field name="veh_categ_id" options="{'no_create':1}" widget="many2many_tags"/>
+								            <field name="material" options="{'no_create':1}" widget="many2many_tags"/>
+											<field name="work_status"/>
+											<field name="delay_reason"/>
+											<field name="remarks"/>
+										</tree>
+									</field>
+						</page>
+						</notebook>
+					</sheet>
+                </form>
+            </field>
+        </record>
+		<record id="action_pm_daily_statement" model="ir.actions.act_window">
+			<field name="name">Project Manager Daily Statement</field>
+			<field name="res_model">pm.daily.statement</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem id="menu_pm_daily_statement_in_activity_report" parent="root_activity_reports_menu"
+				  name="Project Manager Daily Statement" sequence="19"/>
+		<menuitem action="action_pm_daily_statement" id="menu_pm_daily_statement_in_activity_report_2"
+				  name="Project Manager Daily Statement" sequence="19" parent="menu_pm_daily_statement_in_activity_report"/>
+    </data>
+</openerp>

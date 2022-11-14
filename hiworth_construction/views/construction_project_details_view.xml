@@ -86,9 +86,9 @@
 								<!--								<field name="category_id"/>-->
 <!--								<field name="employee_id" string="Superisor"/>-->
 								<field name="sqft"/>
-<!--								<field name="no_labours"/>-->
-<!--								<field name="veh_categ_id" options="{'no_create':1}" widget="many2many_tags"/>-->
-<!--								<field name="material" options="{'no_create':1}" widget="many2many_tags"/>-->
+								<field name="no_labours"/>
+								<field name="veh_categ_id" options="{'no_create':1}" widget="many2many_tags"/>
+								<field name="material" options="{'no_create':1}" widget="many2many_tags"/>
 <!--								<field name="qty_estimate"/>-->
 <!--								<field name="unit"/>-->
 <!--								<field name="rate"/>-->

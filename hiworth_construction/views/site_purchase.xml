@@ -61,7 +61,7 @@
                                     <field name="desc" required="1" />
                                 <field name="unit" required="1" />
                                 <field name="quantity" widget="char" required="1" sum="Total" />
-                               <field name="project_approved_qty" readonly="1"/>
+                               <field name="project_approved_qty"/>
                                   <field name="processed_qty" readonly="1"/>
                               </tree>
 
@@ -215,7 +215,7 @@
                                     <field name="desc" required="1" />
                                 <field name="unit" required="1" />
                                 <field name="quantity" widget="char" required="1" />
-                                 <field name="project_approved_qty" readonly="1"/>
+                                 <field name="project_approved_qty"/>
                                   <field name="processed_qty" readonly="1"/>
 
                               </tree>
@@ -349,7 +349,7 @@
                                     <field name="desc" required="1" />
                                 <field name="unit" required="1" />
                                 <field name="quantity" widget="char" required="1" />
-                              <field name="project_approved_qty" readonly="1"/>
+                              <field name="project_approved_qty"/>
                                   <field name="processed_qty" readonly="1"/>
 
                               </tree>
@@ -470,7 +470,7 @@
                                     <field name="desc" required="1" />
                                 <field name="unit" required="1" />
                                 <field name="quantity" widget="char" required="1" />
-                                <field name="project_approved_qty" readonly="1"/>
+                                <field name="project_approved_qty"/>
                                   <field name="processed_qty" readonly="1"/>
 
                               </tree>
@@ -593,7 +593,7 @@
                                     <field name="desc" required="1" />
                                 <field name="unit" required="1" />
                                 <field name="quantity" widget="char" required="1" />
-                                 <field name="project_approved_qty" readonly="1"/>
+                                 <field name="project_approved_qty"/>
                                   <field name="processed_qty" readonly="1"/>
 
                               </tree>

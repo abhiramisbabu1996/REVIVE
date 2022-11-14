@@ -35,3 +35,4 @@ import disposable_products
 import product_category_list
 import material_cost_transfer
 import tracker_project
+import project_manager_daily_stmt

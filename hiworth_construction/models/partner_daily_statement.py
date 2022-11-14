@@ -856,6 +856,7 @@ class PartnerDailyStatement(models.Model):
 		move = self.env['account.move']
 		journal = self.env['account.journal'].sudo().search([('name','=','CASH')])
 		if not journal:
+			# pass
 			raise except_orm(_('Warning'),_('Please Create Journal With name Miscellaneous Journal'))
 		if len(journal) > 1:
 			raise except_orm(_('Warning'),_('Multiple Journal with same name Miscellaneous Journal'))

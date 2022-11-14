@@ -53,6 +53,7 @@
          'views/employee_activity.xml',
          'views/delay_report.xml',
          'views/progress_report.xml',
+         'views/project_manager_daily_statement.xml',
 
 
          'report/activity_reports.xml',
