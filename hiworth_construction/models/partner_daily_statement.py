@@ -374,12 +374,43 @@ class PartnerDailyStatement(models.Model):
 	products_received_lines = fields.One2many('partner.received.products', 'partner_id')
 	products_used_lines = fields.One2many('partner.used.products', 'partner_id')
 	subcontractor_products_used_lines = fields.One2many('partner.used.products', 'partner_id')
-	project_task_ids = fields.One2many('project.task', 'partner_statement_id')
+	# project_task_ids = fields.One2many('project.task', 'partner_statement_id')
+	project_task_ids = fields.One2many('task.line', 'partner_statement_id')
 	project_task_id = fields.Many2one('project.task')
 	project_task_line_ids = fields.One2many('task.line', 'partner_statement_id')
 
 	@api.onchange('project_task_id')
 	def onchange_project_task_id(self):
+		self.project_task_ids = False
+		self.project_task_line_ids = False
+		project_task_ids = []
+		project_task_line_ids = []
+		if self.project_task_id:
+			statements_ids = self.project_task_id.task_line_ids
+			for statement in statements_ids:
+				values_dict = statement.read()
+				if 'project_task_id' in values_dict[0]:
+					values_dict[0]['project_task_id'] = False
+					project_task_line_ids.append((0,0,values_dict[0]))
+				# self.write({'project_task_line_ids': [(0,0,values_dict[0])]})
+				if statement.subcontractor:
+					project_task_ids.append((0, 0, values_dict[0]))
+		self.update({'project_task_line_ids': project_task_line_ids})
+		self.update({'project_task_ids': project_task_ids})
+
+					# new_subcontractor_line = self.env['task.line'].create(values_dict[0])
+					# project_task_ids += new_subcontractor_line.ids
+				# new_task_line = self.env['task.line'].create(values_dict[0])
+
+			# if statements_ids:
+			# 	new_partner_line_ids = statements_ids.copy()
+			# 	project_task_line_ids += new_partner_line_ids.ids
+			# self.project_task_line_ids = project_task_line_ids
+			# 	if statement.subcontractor:
+			# 		new_subcontractor_line = statement.copy()
+			# 		project_task_ids += new_subcontractor_line
+			# self.project_task_ids = project_task_ids
+
 		return
 
 	@api.onchange('project_id','location_ids')
@@ -396,15 +427,16 @@ class PartnerDailyStatement(models.Model):
 
 	@api.onchange('project_id')
 	def onchange_project(self):
-		self.project_task_ids = False
-		project_task_ids = []
-		for rec in self:
-			if rec.project_id:
-				statements_ids = self.env['project.task'].search([('project_id', '=', rec.project_id.id)])
-				if statements_ids:
-					new_partner_line_ids = statements_ids.copy()
-					project_task_ids += new_partner_line_ids.ids
-			rec.project_task_ids = project_task_ids
+		self.project_task_id = False
+		self.location_ids = False
+		if self.project_id:
+			return {
+			'domain': {
+				'project_task_id': [('project_id', '=', self.project_id.id)],
+				'location_ids': [('id', 'in', self.project_id.project_location_ids.ids)],
+			},
+		}
+
 
 
 	# @api.onchange('location_ids')

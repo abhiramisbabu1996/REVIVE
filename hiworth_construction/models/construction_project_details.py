@@ -638,8 +638,8 @@ class project(models.Model):
 
     @api.model
     def _default_company_id(self):
-        return self.env.user.company.partner_id
-    
+        return self.env.user.company_id.partner_id
+
     company_id = fields.Many2one('res.company', 'Company', required=True,)
     estimated_cost = fields.Float(compute='_compute_estimated_cost', store=True, string='Estimated Cost')
     estimated_cost_extra = fields.Float(compute='_compute_estimated_cost_extra', store=True, string='Estimated Cost for Extra Work')
@@ -678,8 +678,8 @@ class project(models.Model):
     directory_ids = fields.One2many('project.directory', 'project_id', 'Directory')
     project_location_ids = fields.Many2many('stock.location','stock_location_project_rel','stock_location_id','project_id',"Locations")
     # partner_id.property_account_receivable.balance
-    # company_contractor_id = fields.Many2one('res.partner', domain=[('company_contractor', '=', True)], string="Company", default=_default_company_id)
-    company_contractor_id = fields.Many2one('res.partner', domain=[('company_contractor', '=', True)], string="Company")
+    company_contractor_id = fields.Many2one('res.partner', domain=[('company_contractor', '=', True)], string="Company", default=_default_company_id)
+    # company_contractor_id = fields.Many2one('res.partner', domain=[('company_contractor', '=', True)], string="Company")
     agreement_no = fields.Char("Agreement No")
     agreement_date = fields.Date("Agreement Date")
     district_id = fields.Many2one('location.district',"District")

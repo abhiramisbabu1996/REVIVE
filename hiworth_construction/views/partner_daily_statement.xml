@@ -445,16 +445,24 @@
 						<page string="Details Of Required Items">
 							<field name="details_rqrd_item" nolabel="1" attrs="{'readonly':[('state','in',('confirmed','approved','checked','cancelled'))]}" context="{'default_general_purchase':True,'default_date':date}">
 								 <tree>
-									<field name="name" />
-									<field name="supervisor_id" />
-							  	 	<field name="responsible" invisible="1"/>
-									<field name="order_date" />
-									<field name="min_expected_date" />
-									<field name="max_expected_date" />
-									<field name="received_date"   />
-									 <field name="item_ids" widget="many2many_tags"/>
-									<field name="estimated_amt"/>
+									 <field name="name" string="P.R NO"/>
+									 <field name="order_by"/>
+									 <field name="mode_of_order"/>
+									<field name="responsible" invisible="1"/>
+									<field name="order_date"/>
+									<field name="min_expected_date"/>
+									<field name="max_expected_date"/>
 									<field name="state"/>
+<!--									<field name="name" />-->
+<!--									<field name="supervisor_id" />-->
+<!--							  	 	<field name="responsible" invisible="1"/>-->
+<!--									<field name="order_date" />-->
+<!--									<field name="min_expected_date" />-->
+<!--									<field name="max_expected_date" />-->
+<!--									<field name="received_date"   />-->
+<!--									 <field name="item_ids" widget="many2many_tags"/>-->
+<!--									<field name="estimated_amt"/>-->
+<!--									<field name="state"/>-->
 								  </tree>
 							</field>
 						</page>
@@ -762,13 +770,24 @@
 					<notebook>
 						<page string="Subcontractor Daily Work">
 							<field name="project_task_ids" nolabel="1" no_create="0">
-								<tree>
-									<field name="name"/>
-									<field name="project_id"/>
-									<field name="date_start" groups="base.group_no_one"/>
-									<field name="date_deadline" invisible="context.get('deadline_visible',True)"/>
-									<field name="date_end" groups="base.group_no_one"/>
-								</tree>
+								<tree editable="bottom">
+									<field name="estimate_plan_line" string="Work"/>
+									<field name="work_id" string="Description Of Work"/>
+									<!--								<field name="category_id"/>-->
+	<!--								<field name="employee_id" string="Superisor"/>-->
+									<field name="sqft"/>
+									<field name="no_labours"/>
+									<field name="veh_categ_id" options="{'no_create':1}" widget="many2many_tags"/>
+									<field name="material" options="{'no_create':1}" widget="many2many_tags"/>
+	<!--								<field name="qty_estimate"/>-->
+	<!--								<field name="unit"/>-->
+	<!--								<field name="rate"/>-->
+	<!--								<field name="estimate_cost"/>-->
+									<field name="start_date"/>
+									<field name="finish_date"/>
+									<field name="subcontractor"/>
+									<field name="remarks_new"/>
+							</tree>
 						</field>
 						</page>
 						<page string="Details Of Used Items">
