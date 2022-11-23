@@ -803,13 +803,13 @@ class HREmployee1(models.Model):
 		if esi_payment_date:
 			print 'abs((esi_payment_date - today).days)----------------', abs((esi_payment_date - today).days)
 			esi = self.env['hr.esi.payment'].search([('month','=',month),('year','=',today.year),('state','=', 'paid')])
-			if esi_payment_date and abs((esi_payment_date - today).days) <= 15 and not esi:
-				self.env['popup.notifications'].sudo().create({
-													  'name':self.env.user.id,
-													  'status':'draft',
-													  'pf_esi':True,
-													  'message':'Last date of ESI payment is on' + ' ' + str(esi_payment_date),
-													  })
+			# if esi_payment_date and abs((esi_payment_date - today).days) <= 15 and not esi:
+			# 	self.env['popup.notifications'].sudo().create({
+			# 										  'name':self.env.user.id,
+			# 										  'status':'draft',
+			# 										  'pf_esi':True,
+			# 										  'message':'Last date of ESI payment is on' + ' ' + str(esi_payment_date),
+			# 										  })
 
 
 			

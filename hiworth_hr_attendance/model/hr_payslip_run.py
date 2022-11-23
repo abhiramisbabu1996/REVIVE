@@ -155,10 +155,11 @@ class HRPayslipBatches(models.Model):
 
 	@api.multi
 	def unlink(self):
-		for rec in self:
-			if rec.state in ['verify','approve','payment','paid']:
-				raise osv.except_osv(_('Warning!'),
-									 _("Payslip Record Can'tbe deleted from an approval stage") % (lines.employee_id.name,))
+		# for rec in self:
+			# if rec.state in ['verify','approve','payment','paid']:
+			# 	raise osv.except_osv(_('Warning!'),
+			# 						 _("Payslip Record Can'tbe deleted from an approval stage") % (lines.employee_id.name,))
+			#
 		return super(HRPayslipBatches, self).unlink()
 
 	contract_company_id = fields.Many2one('res.partner',domain="[('company_contractor','=',True)]",string="Contract Company")

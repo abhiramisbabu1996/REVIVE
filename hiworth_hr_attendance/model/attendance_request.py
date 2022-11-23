@@ -49,8 +49,9 @@ class AttendanceRequest(models.Model):
 
 	@api.multi
 	def unlink(self):
-		if self.state != 'draft':
-			raise osv.except_osv(_('Warning!'), _('Processed attendance request can not be deleted'))
+		# if self.state != 'draft':
+		# 	raise osv.except_osv(_('Warning!'), _('Processed attendance request can not be deleted'))
+		#
 		return super(AttendanceRequest, self).unlink()
 
 	@api.multi
